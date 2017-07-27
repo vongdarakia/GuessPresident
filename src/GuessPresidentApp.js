@@ -12,6 +12,11 @@ class GuessPresidentApp extends Component {
 		}
 	}
 
+	componentDidMount() {
+		// Focus on the name input once the component is on the screen.
+		document.getElementById("name").focus();
+	}
+
 	skip() {
 		let newId = Math.floor(Math.random() * presidents.length);
 
@@ -19,7 +24,10 @@ class GuessPresidentApp extends Component {
 		while (newId === this.state.id) {
 			newId = Math.floor(Math.random() * presidents.length);
 		}
-		this.setState({ id: newId });
+
+		this.setState({ id: newId, status: "" });
+		document.getElementById("name").value = "";
+		document.getElementById("name").focus();
 	}
 
 	onEnter(e) {
@@ -50,6 +58,7 @@ class GuessPresidentApp extends Component {
 
 	answer() {
 		this.setState({status: `It's ${presidents[this.state.id].name}. Someone needs to go back to high school.`});
+		document.getElementById("name").focus();
 	}
 
 	render() {
