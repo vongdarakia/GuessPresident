@@ -1,0 +1,63 @@
+.GuessPresidentApp {
+	text-align: center;
+	padding: 20px 0 100px 0;
+	background-color: #2574A9;
+	font-family: 'Italianno', cursive;
+	font-size: 2em;
+	font-weight: 100;
+}
+
+.GuessPresidentApp #btn-skip, .GuessPresidentApp #btn-answer {
+	margin-top: 20px;
+	border: none;
+	padding: 10px 20px;
+	font-size: 1.2em;
+	background-color: #EEEEEE;
+
+	cursor: pointer;
+	transition: all .3s;
+	font-family: 'Italianno', cursive;
+}
+
+.GuessPresidentApp #btn-skip:hover,
+.GuessPresidentApp #btn-answer:hover {
+	background-color: #EF4836;
+	color: white;
+}
+
+.img-wrapper {
+	height: 300px;
+	width: 300px;
+	margin: auto;
+}
+
+img {
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
+}
+
+.inputs {
+	margin-top: 20px;
+}
+
+#name {
+	text-align: center;
+	font-size: 18px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #ddd;
+	color: #EEEEEE;
+	outline: none;
+	font-size: 1.5em;
+	font-family: 'Italianno', cursive;
+}
+
+.GuessPresidentApp h3 {
+	color: #EF4836;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
