@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './GuessPresidentApp.css';
 
 const presidents = require('./presidents.json');
 
@@ -12,21 +12,23 @@ class GuessPresidentApp extends Component {
 		}
 	}
 
-	next() {
+	skip() {
 		let newId = Math.floor(Math.random() * presidents.length);
 
+		// Randomize until we find a different id than our previous one.
 		while (newId === this.state.id) {
 			newId = Math.floor(Math.random() * presidents.length);
 		}
-
 		this.setState({ id: newId });
 	}
 
 	onEnter(e) {
 		let pres = presidents[this.state.id];
-		let self = this;
+		let correct = false;
+		let self = this;		// Need this because in the "setTimeout", 'this'
+						 		// will be refering to a different context.
+
 		if (e.key === "Enter") {
-			let correct = false;
 			if (e.target.value === pres.name ||
 				e.target.value.toLowerCase() === pres.name.toLowerCase()) {
 				this.setState({status: "Nice job! That was correct!"});
@@ -34,10 +36,12 @@ class GuessPresidentApp extends Component {
 			} else {
 				this.setState({status: "Sorry, that was wrong. Are you even American?"});
 			}
+			// Clears the inputs and status after 2 seconds.
 			setTimeout(function() {
 				self.setState({status: ""});
 				if (correct) {
-					self.next();
+					self.skip();
+					document.getElementById("name").value = "";
 				}
 			}, 2000);
 		}
@@ -59,7 +63,7 @@ class GuessPresidentApp extends Component {
 					<input type="text" id="name" onKeyPress={this.onEnter.bind(this)}
 						placeholder="Enter name"/>
 					<br/>
-					<button id="btn-skip" onClick={this.next.bind(this)}>Skip because I'm a looser</button>
+					<button id="btn-skip" onClick={this.skip.bind(this)}>Skip because I'm a loser</button>
 					<br/>
 					<button id="btn-answer" onClick={this.answer.bind(this)}>Give up for Answer</button>
 				</div>

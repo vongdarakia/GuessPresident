@@ -37,7 +37,7 @@ img {
 	object-fit: contain;
 }
 
-.inputs {
+.GuessPresidentApp .inputs {
 	margin-top: 20px;
 }
 
@@ -55,9 +55,6 @@ img {
 
 .GuessPresidentApp h3 {
 	color: #EF4836;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+	font-size: 1.5em;
+	margin-bottom: 10px;
 }
