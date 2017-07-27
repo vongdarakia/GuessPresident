@@ -23,28 +23,29 @@ class GuessPresidentApp extends Component {
 	}
 
 	onEnter(e) {
-		let pres = presidents[this.state.id];
-		let correct = false;
-		let self = this;		// Need this because in the "setTimeout", 'this'
-						 		// will be refering to a different context.
+		if (e.key !== "Enter")
+			return;
 
-		if (e.key === "Enter") {
-			if (e.target.value === pres.name ||
-				e.target.value.toLowerCase() === pres.name.toLowerCase()) {
-				this.setState({status: "Nice job! That was correct!"});
-				correct = true;
-			} else {
-				this.setState({status: "Sorry, that was wrong. Are you even American?"});
-			}
-			// Clears the inputs and status after 2 seconds.
-			setTimeout(function() {
-				self.setState({status: ""});
-				if (correct) {
-					self.skip();
-					document.getElementById("name").value = "";
-				}
-			}, 2000);
+		let pres = presidents[this.state.id];
+		let val = e.target.value.trim().toLowerCase();
+		let correct = val === pres.name.toLowerCase();
+		let self = this;	// Need this because in the "setTimeout", 'this'
+							// will be refering to a different context.
+
+		if (correct) {
+			this.setState({status: "Nice job! That was correct!"});
+		} else {
+			this.setState({status: "Sorry, that was wrong. Are you even American?"});
 		}
+		// Clears the inputs and status after 2 seconds.
+		setTimeout(function() {
+			self.setState({status: ""});
+			// clears input only if user is correct.
+			if (correct) {
+				self.skip();
+				document.getElementById("name").value = "";
+			}
+		}, 2000);
 	}
 
 	answer() {
@@ -65,7 +66,7 @@ class GuessPresidentApp extends Component {
 					<br/>
 					<button id="btn-skip" onClick={this.skip.bind(this)}>Skip because I'm a loser</button>
 					<br/>
-					<button id="btn-answer" onClick={this.answer.bind(this)}>Give up for Answer</button>
+					<button id="btn-answer" onClick={this.answer.bind(this)}>Give up for answer</button>
 				</div>
 				<div>
 					<p>{this.state.status}</p>
